@@ -1,3 +1,6 @@
+#Desafio Drag & Drop
+<img width="1079" height="757" alt="eses" src="https://github.com/user-attachments/assets/99524d9a-75e1-4665-8060-7fef01ac0de7" />
+
 # ✨ Funcionalidades
 
 ## 🎯 Gestão Visual de Tarefas
@@ -53,18 +56,12 @@
 ## 🧭 Passos
 
 ```bash
-# 1. Clonar o repositório
-git clone https://github.com/usuario/nome-do-repositorio.git
-
-# 2. Entrar na pasta do projeto
-cd nome-do-repositorio
-
-# 3. Instalar as dependências
+# 1. Instalar as dependências
 npm install
 # ou
 yarn
 
-# 4. Rodar o projeto em modo desenvolvimento
+# 2. Rodar o projeto em modo desenvolvimento
 npm run dev
 # ou
 yarn dev
