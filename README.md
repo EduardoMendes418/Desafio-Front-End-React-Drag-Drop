@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+✨ Funcionalidades
+🎯 Gestão Visual de Tarefas
+Sistema de 3 colunas: A Fazer, Em Progresso e Concluído
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Drag & Drop intuitivo entre colunas
 
-Currently, two official plugins are available:
+Visualização clara do status de cada tarefa
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📝 Tarefas Ricas em Detalhes
+Título e descrição completos
 
-## React Compiler
+Sistema de prioridades (Alta, Média, Baixa)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Prazos em minutos com indicador visual
 
-## Expanding the ESLint configuration
+Tags coloridas para categorização
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Imagens com texto alternativo
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Cores automáticas para tags
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+💾 Persistência de Dados
+Salvamento automático no localStorage
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Recuperação do estado ao recarregar
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Dados preservados entre sessões
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+🎨 Interface Moderna
+Design responsivo para todos os dispositivos
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Animações suaves e feedback visual
+
+Cores acessíveis e contrastantes
+
+Ícones intuitivos
+
+🚀 Tecnologias Utilizadas
+Tecnologia Versão Propósito
+React 18.2.0 Biblioteca principal UI
+TypeScript 5.0.2 Tipagem estática
+Vite 4.4.5 Build tool e dev server
+Tailwind CSS 3.3.3 Estilização utility-first
+React Beautiful DnD 13.1.1 Drag and drop
+React Router 6.16.0 Roteamento SPA
+React Toastify 9.1.3 Notificações
+React Ionicons 5.5.0 Ícones
+Vitest 0.34.6 Framework de testes
+Testing Library 0.13.0 Testes de componentes
+📦 Instalação e Execução
+Pré-requisitos
+Node.js 16 ou superior
+
+npm ou yarn
+
+Passos para exec
