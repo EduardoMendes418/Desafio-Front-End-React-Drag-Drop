@@ -1,5 +1,7 @@
-#Desafio Drag & Drop
-<img width="1079" height="757" alt="eses" src="https://github.com/user-attachments/assets/99524d9a-75e1-4665-8060-7fef01ac0de7" />
+
+# Desafio Drag & Drop
+<img width="1067" height="919" alt="eses" src="https://github.com/user-attachments/assets/bc9f865f-0510-430d-bda9-eaef3a2dcf18" />
+
 
 # ✨ Funcionalidades
 
