@@ -16,7 +16,12 @@ interface AddModalProps {
   handleAddTask: (taskData: any) => void;
 }
 
-const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) => {
+const AddModal = ({
+  isOpen,
+  onClose,
+  setOpen,
+  handleAddTask,
+}: AddModalProps) => {
   const initialTaskData = {
     id: uuidv4(),
     title: "",
@@ -32,7 +37,9 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
   const [tagTitle, setTagTitle] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
     setTaskData({ ...taskData, [name]: value });
@@ -130,7 +137,9 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
           Adicionar Etiqueta
         </button>
         <div className="w-full">
-          {taskData.tags.length > 0 && <span className="text-sm font-medium">Etiquetas:</span>}
+          {taskData.tags.length > 0 && (
+            <span className="text-sm font-medium">Etiquetas:</span>
+          )}
           {taskData.tags.map((tag, index) => (
             <div
               key={index}

@@ -14,7 +14,7 @@ const Task = ({ task, provided, onDelete }: TaskProps) => {
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    
+
     if (window.confirm(`Tem certeza que deseja excluir a tarefa "${title}"?`)) {
       onDelete?.(id, title);
     }
@@ -88,16 +88,16 @@ const Task = ({ task, provided, onDelete }: TaskProps) => {
             {priority === "high"
               ? "Alta"
               : priority === "medium"
-              ? "Média"
-              : "Baixa"}
+                ? "Média"
+                : "Baixa"}
           </span>
           <div
             className={`w-[60px] rounded-full h-[5px] ${
               priority === "high"
                 ? "bg-red-500"
                 : priority === "medium"
-                ? "bg-orange-500"
-                : "bg-blue-500"
+                  ? "bg-orange-500"
+                  : "bg-blue-500"
             }`}
           ></div>
         </div>

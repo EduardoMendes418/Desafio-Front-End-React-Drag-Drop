@@ -25,7 +25,7 @@ export const boardSlice = createSlice({
 
     addTask: (
       state,
-      action: PayloadAction<{ columnId: string; task: TaskT }>
+      action: PayloadAction<{ columnId: string; task: TaskT }>,
     ) => {
       const { columnId, task } = action.payload;
 
@@ -40,7 +40,7 @@ export const boardSlice = createSlice({
 
       Object.keys(state.columns).forEach((columnId) => {
         state.columns[columnId].items = state.columns[columnId].items.filter(
-          (item) => item.id !== taskId
+          (item) => item.id !== taskId,
         );
       });
 
@@ -53,11 +53,7 @@ export const boardSlice = createSlice({
   },
 });
 
-export const {
-  updateColumns,
-  addTask,
-  deleteTask,
-  setError,
-} = boardSlice.actions;
+export const { updateColumns, addTask, deleteTask, setError } =
+  boardSlice.actions;
 
 export default boardSlice.reducer;

@@ -73,7 +73,7 @@ describe("Task Component", () => {
   it("should show delete button on hover", () => {
     const mockOnDelete = vi.fn();
     render(
-      <Task task={mockTask} provided={mockProvided} onDelete={mockOnDelete} />
+      <Task task={mockTask} provided={mockProvided} onDelete={mockOnDelete} />,
     );
 
     const taskElement = screen.getByText("Test Task").closest("div");
@@ -90,7 +90,7 @@ describe("Task Component", () => {
     confirmMock.mockImplementation(() => true);
 
     render(
-      <Task task={mockTask} provided={mockProvided} onDelete={mockOnDelete} />
+      <Task task={mockTask} provided={mockProvided} onDelete={mockOnDelete} />,
     );
 
     const taskElement = screen.getByText("Test Task").closest("div");
@@ -111,7 +111,7 @@ describe("Task Component", () => {
     confirmMock.mockImplementation(() => false);
 
     render(
-      <Task task={mockTask} provided={mockProvided} onDelete={mockOnDelete} />
+      <Task task={mockTask} provided={mockProvided} onDelete={mockOnDelete} />,
     );
 
     const taskElement = screen.getByText("Test Task").closest("div");

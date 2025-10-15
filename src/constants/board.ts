@@ -16,5 +16,5 @@ export const initialBoard: Columns = {
 };
 
 export const STORAGE_KEYS = {
-  BOARD: 'kanban-board',
+  BOARD: "kanban-board",
 } as const;

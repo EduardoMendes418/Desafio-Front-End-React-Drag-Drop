@@ -4,7 +4,7 @@ import { Columns } from "../types";
 export const onDragEnd = (
   result: DropResult,
   columns: Columns,
-  setColumns: (columns: Columns) => void
+  setColumns: (columns: Columns) => void,
 ) => {
   if (!result.destination) return;
 

@@ -63,7 +63,7 @@ describe("Navbar Interactive Behavior", () => {
     render(
       <div onClick={mockOnClick}>
         <Navbar />
-      </div>
+      </div>,
     );
 
     const logoArea = screen.getByText("Kanban Board").closest("div");
