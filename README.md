@@ -1,7 +1,6 @@
-
 # Desafio Drag & Drop
-<img width="1067" height="919" alt="eses" src="https://github.com/user-attachments/assets/bc9f865f-0510-430d-bda9-eaef3a2dcf18" />
 
+<img width="1067" height="919" alt="eses" src="https://github.com/user-attachments/assets/bc9f865f-0510-430d-bda9-eaef3a2dcf18" />
 
 # ✨ Funcionalidades
 
@@ -10,6 +9,11 @@
 - 🧭 Sistema de 3 colunas: **A Fazer**, **Em Progresso** e **Concluído**
 - 🖱️ **Drag & Drop** intuitivo entre colunas
 - 👁️ Visualização clara do status de cada tarefa
+
+## 🏗️ Infrastructure
+
+- 📦 `store/` com configuração Redux 🔴
+- 🪝 Hooks type-safe 🛡️ unificados 🔗
 
 ## 📝 Tarefas Ricas em Detalhes
 

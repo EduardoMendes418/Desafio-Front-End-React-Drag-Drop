@@ -1,129 +1,93 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useState, useEffect } from "react";
-import { Board, saveBoardToStorage } from "../../data/board";
-import { Columns } from "../../types";
-import { onDragEnd } from "../../helpers/onDragEnd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { useState } from "react";
 import { AddOutline } from "react-ionicons";
 import AddModal from "../../components/Modals/AddModal";
 import Task from "../../components/Task";
 import { toast } from "react-toastify";
+import { useBoard } from "../../hooks/useBoard";
+import { onDragEnd } from "../../helpers/onDragEnd";
+import { TaskT, Column } from "../../types";
 
 const Home = () => {
-  const [colunas, setColunas] = useState<Columns>(Board);
-  const [modalAberto, setModalAberto] = useState(false);
-  const [colunaSelecionada, setColunaSelecionada] = useState("");
+  const { columns, handleAddTask, handleDeleteTask, handleUpdateColumns } =
+    useBoard();
 
-  useEffect(() => {
-    saveBoardToStorage(colunas);
-  }, [colunas]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedColumn, setSelectedColumn] = useState("");
 
-  const abrirModal = (colunaId: any) => {
-    setColunaSelecionada(colunaId);
-    setModalAberto(true);
+  const openModal = (columnId: string) => {
+    setSelectedColumn(columnId);
+    setIsModalOpen(true);
   };
 
-  const fecharModal = () => {
-    setModalAberto(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedColumn("");
   };
 
-  const adicionarTarefa = (dadosTarefa: any) => {
-    const novoQuadro = { ...colunas };
-    novoQuadro[colunaSelecionada].items.push(dadosTarefa);
-    setColunas(novoQuadro);
+  const handleAddTaskSubmit = (taskData: any) => {
+    const newTask: TaskT = {
+      id: taskData.id,
+      title: taskData.title,
+      description: taskData.description,
+      priority: taskData.priority,
+      deadline: taskData.deadline,
+      image: taskData.image,
+      alt: taskData.alt,
+      tags: taskData.tags,
+    };
 
-    toast.success(`Tarefa "${dadosTarefa.title}" adicionada com sucesso! 🎉`, {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    handleAddTask(selectedColumn, newTask);
+    toast.success(`Tarefa "${taskData.title}" adicionada com sucesso! 🎉`);
   };
 
-  const excluirTarefa = (taskId: string, taskTitle: string) => {
-    const novoQuadro = { ...colunas };
-    let tarefaExcluida = false;
-
-    Object.keys(novoQuadro).forEach((colunaId) => {
-      const coluna = novoQuadro[colunaId];
-      const index = coluna.items.findIndex((item: any) => item.id === taskId);
-
-      if (index !== -1) {
-        coluna.items.splice(index, 1);
-        tarefaExcluida = true;
-      }
-    });
-
-    if (tarefaExcluida) {
-      setColunas(novoQuadro);
-      toast.info(`Tarefa "${taskTitle}" excluída com sucesso! 🗑️`, {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-    }
+  const handleDeleteTaskConfirm = (taskId: string, taskTitle: string) => {
+    handleDeleteTask(taskId);
+    toast.info(`Tarefa "${taskTitle}" excluída com sucesso! 🗑️`);
   };
+
+  const handleDragEnd = (result: DropResult) => {
+    onDragEnd(result, columns, handleUpdateColumns);
+  };
+
+  const columnEntries = Object.entries(columns) as [string, Column][];
 
   return (
     <>
-      <DragDropContext
-        onDragEnd={(resultado: any) =>
-          onDragEnd(resultado, colunas, setColunas)
-        }
-      >
-        <div
-          className="
-            w-full 
-            flex 
-            flex-wrap 
-            items-start 
-            gap-4 
-            px-4 
-            pb-8 
-            overflow-x-hidden
-            justify-center
-          "
-        >
-          {Object.entries(colunas).map(([colunaId, coluna]: any) => (
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <div className="w-full flex flex-wrap items-start gap-4 px-4 pb-8 justify-center">
+          {columnEntries.map(([columnId, column]) => (
             <div
-              key={colunaId}
-              className="
-                w-full 
-                sm:w-[300px] 
-                md:w-[290px] 
-                flex 
-                flex-col 
-                gap-3 
-                flex-shrink-0
-              "
+              key={columnId}
+              className="w-full sm:w-[300px] md:w-[290px] flex flex-col gap-3 flex-shrink-0"
             >
-              <Droppable droppableId={colunaId}>
-                {(provided: any) => (
+              <Droppable droppableId={columnId}>
+                {(provided) => (
                   <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                     className="flex flex-col gap-3 items-center py-5"
                   >
-                    <div className="flex items-center justify-center py-2 w-full bg-white rounded-lg shadow-sm text-[#555] font-medium text-sm md:text-base">
-                      {coluna.name}
+                    <div className="flex items-center justify-center py-2 w-full bg-white rounded-lg shadow-sm text-gray-600 font-medium text-sm md:text-base">
+                      {column.name}
                     </div>
 
-                    {coluna.items.map((tarefa: any, indice: any) => (
+                    {column.items.map((task: TaskT, index: number) => (
                       <Draggable
-                        key={tarefa.id.toString()}
-                        draggableId={tarefa.id.toString()}
-                        index={indice}
+                        key={task.id}
+                        draggableId={task.id}
+                        index={index}
                       >
-                        {(provided: any) => (
+                        {(provided) => (
                           <Task
                             provided={provided}
-                            task={tarefa}
-                            onDelete={excluirTarefa}
+                            task={task}
+                            onDelete={handleDeleteTaskConfirm}
                           />
                         )}
                       </Draggable>
@@ -133,39 +97,23 @@ const Home = () => {
                 )}
               </Droppable>
 
-              <div
-                onClick={() => abrirModal(colunaId)}
-                className="
-                  flex 
-                  cursor-pointer 
-                  items-center 
-                  justify-center 
-                  gap-1 
-                  py-2 
-                  w-full 
-                  bg-white 
-                  rounded-lg 
-                  shadow-sm 
-                  text-[#555] 
-                  font-medium 
-                  text-sm 
-                  md:text-base 
-                  hover:bg-gray-50 
-                  transition
-                "
+              <button
+                onClick={() => openModal(columnId)}
+                className="flex items-center justify-center gap-2 py-3 w-full bg-white rounded-lg shadow-sm text-gray-600 font-medium text-sm hover:bg-gray-50 transition-colors duration-200 border border-gray-200"
               >
-                <AddOutline color={"#555"} />
+                <AddOutline color={"#6b7280"} />
                 Adicionar Tarefa
-              </div>
+              </button>
             </div>
           ))}
         </div>
       </DragDropContext>
+
       <AddModal
-        isOpen={modalAberto}
-        onClose={fecharModal}
-        setOpen={setModalAberto}
-        handleAddTask={adicionarTarefa}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        setOpen={setIsModalOpen}
+        handleAddTask={handleAddTaskSubmit}
       />
     </>
   );

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TimeOutline, TrashOutline } from "react-ionicons";
 import { TaskT } from "../../types";
-import { useState } from "react";
 
 interface TaskProps {
   task: TaskT;
@@ -11,15 +10,13 @@ interface TaskProps {
 
 const Task = ({ task, provided, onDelete }: TaskProps) => {
   const { id, title, description, priority, deadline, image, alt, tags } = task;
-  const [showDelete, setShowDelete] = useState(false);
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (
-      onDelete &&
-      window.confirm(`Tem certeza que deseja excluir a tarefa "${title}"?`)
-    ) {
-      onDelete(id, title);
+    e.preventDefault();
+    
+    if (window.confirm(`Tem certeza que deseja excluir a tarefa "${title}"?`)) {
+      onDelete?.(id, title);
     }
   };
 
@@ -28,25 +25,18 @@ const Task = ({ task, provided, onDelete }: TaskProps) => {
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
-      className="w-full cursor-grab bg-[#fff] flex flex-col justify-between gap-3 items-start shadow-sm rounded-xl px-3 py-4 relative transition-all duration-200 hover:shadow-md"
-      onMouseEnter={() => setShowDelete(true)}
-      onMouseLeave={() => setShowDelete(false)}
-      onFocus={() => setShowDelete(true)}
-      onBlur={() => setShowDelete(false)}
+      className="w-full cursor-grab bg-white flex flex-col justify-between gap-3 items-start shadow-sm rounded-xl px-3 py-4 relative transition-all duration-200 hover:shadow-md"
     >
       {onDelete && (
         <button
           onClick={handleDelete}
-          className={`
-            absolute top-2 right-2 p-2 rounded-full transition-all duration-200
-            ${
-              showDelete
-                ? "bg-red-500 text-white scale-100 opacity-100"
-                : "bg-red-100 text-red-500 scale-90 opacity-0"
-            }
-            hover:bg-red-600 hover:text-white focus:bg-red-500 focus:text-white
+          className="
+            absolute top-2 right-2 p-2 rounded-full 
+            bg-red-100 text-red-500 
+            hover:bg-red-500 hover:text-white 
+            transition-all duration-200
             focus:outline-none focus:ring-2 focus:ring-red-300
-          `}
+          "
           title="Excluir tarefa"
           aria-label={`Excluir tarefa: ${title}`}
         >

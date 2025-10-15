@@ -14,12 +14,14 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
     "autoprefixer": "^10.4.18",
     "postcss": "^8.4.35",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-ionicons": "^4.2.1",
+    "react-redux": "^9.2.0",
     "react-router": "^6.22.2",
     "react-router-dom": "^6.22.2",
     "react-toastify": "^11.0.5",
