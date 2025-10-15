@@ -10,7 +10,7 @@
 - 🖱️ **Drag & Drop** intuitivo entre colunas
 - 👁️ Visualização clara do status de cada tarefa
 
-## 🏗️ Infrastructure
+## 🏗️ Infraestrutura
 
 - 📦 `store/` com configuração Redux 🔴
 - 🪝 Hooks type-safe 🛡️ unificados 🔗
